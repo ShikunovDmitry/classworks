@@ -1,0 +1,6 @@
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <delegatePublic publicIdStartString="asd" catalog="asd">
+        <asd>
+        </asd>
+    </delegatePublic>
+</catalog>
