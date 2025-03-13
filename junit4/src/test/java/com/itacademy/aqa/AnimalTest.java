@@ -53,4 +53,9 @@ public class AnimalTest {
         Assert.assertEquals("I'm not a pig", "Pig", animal.whoIam());
     }
 
+    @Test(expected = RuntimeException.class)
+    public void testException(){
+        throw new RuntimeException("Any exception");
+    }
+
 }
