@@ -1,5 +1,8 @@
 package com.itacademy.aqa;
 
+import com.itacademy.aqa.onliner.pageObject.elements.TopMenuEnum;
+import com.itacademy.aqa.onliner.pageObject.pages.MainPage;
+import com.itacademy.aqa.onliner.pegeFactory.pages.AvtoPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,49 +16,41 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class OnlinerTests {
+public class OnlinerPageObjectTests {
     WebDriver webDriver;
-
-    By topMainMenuLocator = By.className("b-main-navigation");
-    By topMenuAvtoLocator = By.xpath("//nav//*[contains(text(),'Автобарахолка')]");
-    By avtoPageLocator = By.className("vehicle-form__offers");
 
     static {
         System.setProperty("webdriver.chrome.driver", "c:/chromedriver.exe");
     }
 
     @BeforeMethod
-    public void initialize() throws InterruptedException {
+    public void initialize() {
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
         webDriver.manage().timeouts().pageLoadTimeout(10L, TimeUnit.SECONDS);
         webDriver.manage().timeouts().setScriptTimeout(10L, TimeUnit.SECONDS);
         webDriver.get("https://www.onliner.by/");
-        Thread.sleep(1000);
-
-
     }
 
     @Test
     public void onlinerCanBeOpenedTest(){
-        WebElement topMenu = webDriver.findElement(topMainMenuLocator);
 
-        Assert.assertTrue(topMenu.isDisplayed(), "Top menu is not displayed");
+        MainPage mainPage = new MainPage(webDriver);
+
+        Assert.assertTrue(mainPage.isPageOpened(), "Onliner main page is not opened");
 
     }
 
     @Test
     public void avtoCanBeOpened(){
-        WebDriverWait wait  = new WebDriverWait(webDriver,30);
-        wait.until(ExpectedConditions.elementToBeClickable(topMenuAvtoLocator));
+        MainPage mainPage = new MainPage(webDriver);
 
-        WebElement avtoMenu = webDriver.findElement(topMenuAvtoLocator);
+        mainPage.getTopMenu().clickOnItem(TopMenuEnum.AUTOSALES);
 
-        avtoMenu.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(avtoPageLocator));
-        WebElement avtoPageElement = webDriver.findElement(avtoPageLocator);
-        Assert.assertTrue(avtoPageElement.isDisplayed(), "Автобарахолка страница не открыта");
+        AvtoPage avtoPage = new AvtoPage(webDriver);
+
+        Assert.assertTrue(avtoPage.isPageOpened(), "Автобарахолка page is not opened");
 
     }
 
