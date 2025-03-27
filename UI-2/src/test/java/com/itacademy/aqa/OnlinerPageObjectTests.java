@@ -5,6 +5,7 @@ import com.itacademy.aqa.onliner.pages.AvtoPage;
 import com.itacademy.aqa.onliner.pages.MainPage;
 import com.itacademy.aqa.onliner.webDriver.Browser;
 
+import com.itacademy.aqa.onliner.webDriver.Configuration;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -14,8 +15,7 @@ public class OnlinerPageObjectTests {
 
     @BeforeMethod
     public void initialize() {
-        Browser.initDriver();
-        Browser.getWebDriver().get("https://www.onliner.by/");
+        Browser.getWebDriver().get(Configuration.getBaseUrl());
     }
 
     @Test
