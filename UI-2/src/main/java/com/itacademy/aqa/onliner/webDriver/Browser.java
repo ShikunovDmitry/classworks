@@ -1,18 +1,21 @@
 package com.itacademy.aqa.onliner.webDriver;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Browser {
 
     public static final int TIME_OUT_IN_SECONDS = 30;
-    public static final long DEFAULT_TIMEOUT = 10L;
+    public static final long DEFAULT_TIMEOUT = 15L;
 
     private static WebDriver webDriver;
 
@@ -48,11 +51,41 @@ public class Browser {
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             WebElement element = getWebDriver().findElement(locator);
             return element;
-        } catch (NotFoundException ex){
+        } catch (NotFoundException ex) {
             System.out.println(ex.getMessage());
             return null;
         }
 
+    }
+
+    public static void takeScreenShot() {
+        File screenShotsFolder = new File(Configuration.getScreenShotFilder());
+
+        if (!screenShotsFolder.exists()) {
+            screenShotsFolder.mkdirs();
+        }
+        TakesScreenshot ts = (TakesScreenshot) Browser.getWebDriver();
+
+        byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
+
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd-yyyy-h-mm-ss-SS--a");
+
+        String formattedDate = simpleDateFormat.format(date);
+
+        String fileName = Configuration.getBrowserEnum() + formattedDate + ".png";
+
+        try {
+            Files.write(new File(screenShotsFolder.getPath() + "/" + fileName).toPath(),
+                    screenshot, StandardOpenOption.CREATE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static JavascriptExecutor getJavascriptExecutor(){
+        return (JavascriptExecutor) getWebDriver();
     }
 
     public static void close() {

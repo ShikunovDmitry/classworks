@@ -27,6 +27,18 @@ public class BrowserFactory {
                 prefs.put("browser.helperApps.neverAsk.saveToDisk","application/pdf;text/csv;application/octet-stream;application/x-msdownload");
                 chromeOptions.setExperimentalOption("prefs",prefs);
                 webDriver = new ChromeDriver(chromeOptions);
+
+                /*
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--start-maximized");
+
+                    // Подменяем user-agent на обычный браузер
+                    options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36");
+
+                    // Убираем флаги автоматизации
+                    options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+                    options.addArguments("--disable-blink-features=AutomationControlled");
+                 */
             }
             case FIREFOX -> {
                 webDriver = new FirefoxDriver();

@@ -41,4 +41,7 @@ public class Configuration {
     }
 
 
+    public static String getScreenShotFilder() {
+        return properties.getProperty("screenshotFolder");
+    }
 }

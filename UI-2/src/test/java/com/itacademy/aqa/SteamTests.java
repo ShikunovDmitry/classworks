@@ -3,6 +3,8 @@ package com.itacademy.aqa;
 import com.itacademy.aqa.onliner.webDriver.Browser;
 import com.itacademy.aqa.onliner.webDriver.Configuration;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
@@ -11,6 +13,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.time.Duration;
 
 public class SteamTests {
@@ -21,7 +26,7 @@ public class SteamTests {
     }
 
     @Test
-    public void downloadTest() throws InterruptedException {
+    public void downloadTest() {
 
         String downloadDirectory = "C:\\Users\\Dzmitry_Shykunou\\Downloads\\";
 //        String downloadDirectory = Configuration.getDownloadDirectory();
@@ -53,6 +58,30 @@ public class SteamTests {
         Assert.assertTrue(fileToVerify.exists(), " File wasn't downloaded by path " + downloadPath);
 
     }
+
+    @Test
+    public void makeScreenShotTest() throws IOException {
+        File screenShotsFolder = new File("screenshots");
+
+        if(!screenShotsFolder.exists()){
+            screenShotsFolder.mkdirs();
+        }
+        TakesScreenshot ts = (TakesScreenshot) Browser.getWebDriver();
+
+        byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
+        String fileName = "screenshot.png";
+
+        Files.write(new File(screenShotsFolder.getPath() + "/" + fileName ).toPath(),
+                screenshot, StandardOpenOption.CREATE);
+
+    }
+
+    @Test
+    public void makeScreenShotThroughBrowser(){
+        Browser.takeScreenShot();
+    }
+
+
     @AfterMethod
     public void tearDown() {
         Browser.close();
