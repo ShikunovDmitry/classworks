@@ -1,5 +1,7 @@
 package com.itacademy.aqa.onliner.webDriver;
 
+import org.openqa.selenium.Capabilities;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -41,7 +43,11 @@ public class Configuration {
     }
 
 
-    public static String getScreenShotFilder() {
+    public static String getScreenShotFolder() {
         return properties.getProperty("screenshotFolder");
+    }
+
+    public static String getRemoteDriverUrl() {
+        return properties.getProperty("remoteWebDriverUrl");
     }
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -39,7 +40,7 @@ public class Browser {
 
     public static WebElement waitForElementToBeClickable(By locator) {
 
-        WebDriverWait wait = new WebDriverWait(getWebDriver(), TIME_OUT_IN_SECONDS);
+        WebDriverWait wait = new WebDriverWait(getWebDriver(), Duration.ofSeconds(TIME_OUT_IN_SECONDS));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
         WebElement element = getWebDriver().findElement(locator);
         return element;
@@ -47,7 +48,7 @@ public class Browser {
 
     public static WebElement waitForElementToBeVisible(By locator) {
         try {
-            WebDriverWait wait = new WebDriverWait(getWebDriver(), TIME_OUT_IN_SECONDS);
+            WebDriverWait wait = new WebDriverWait(getWebDriver(), Duration.ofSeconds(TIME_OUT_IN_SECONDS));
             wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             WebElement element = getWebDriver().findElement(locator);
             return element;
@@ -59,7 +60,7 @@ public class Browser {
     }
 
     public static void takeScreenShot() {
-        File screenShotsFolder = new File(Configuration.getScreenShotFilder());
+        File screenShotsFolder = new File(Configuration.getScreenShotFolder());
 
         if (!screenShotsFolder.exists()) {
             screenShotsFolder.mkdirs();

@@ -1,0 +1,21 @@
+{
+  "capabilities": [
+    {
+      "browserName": "firefox",
+      "maxInstances": 2,
+      "acceptInsecureCerts": true,
+      "moz:firefoxOptions": {
+        "binary": "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
+      }
+    }
+  ],
+  "configuration": {
+    "nodePolling": 5000,
+    "cleanUpCycle": 5000,
+    "timeout": 30000,
+    "register": true,
+    "registerCycle": 5000,
+    "hub": "http://192.168.100.9:4444/grid/register",
+    "maxSession": 5
+  }
+}

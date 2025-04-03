@@ -34,12 +34,12 @@ public class UploadTest {
 
         Browser.getWebDriver().get("https://image.online-convert.com/convert-to-bmp");
 
-        WebDriverWait wait = new WebDriverWait(Browser.getWebDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(Browser.getWebDriver(), Duration.ofSeconds(10));
         wait.until(webDriver -> webDriver.findElement(By.id("fileUploadInput")));
         WebElement uploadInput = Browser.getWebDriver().findElement(By.id("fileUploadInput"));
         uploadInput.sendKeys(absolutePath);
 
-        WebDriverWait fileUploadWait = new WebDriverWait(Browser.getWebDriver(), 10);
+        WebDriverWait fileUploadWait = new WebDriverWait(Browser.getWebDriver(), Duration.ofSeconds(10));
         fileUploadWait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.xpath("//span[contains(text(),'screenshot.png')]")));
 
