@@ -77,7 +77,10 @@ public class BrowserFactory {
             }
             case REMOTE_EDGE -> {
                 try {
-                    webDriver = new RemoteWebDriver(new URL(Configuration.getRemoteDriverUrl()),new EdgeOptions());
+                    EdgeOptions options = new EdgeOptions();
+                    //options.addArguments("--headless=new");
+//                    options.setBinary("c:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe");
+                    webDriver = new RemoteWebDriver(new URL(Configuration.getRemoteDriverUrl()),options);
                 } catch (MalformedURLException e) {
                     System.out.println("can't create a driver by " + Configuration.getRemoteDriverUrl());
                     webDriver = null;
@@ -87,7 +90,6 @@ public class BrowserFactory {
                 throw new RuntimeException( browserEnum + " is not supported");
             }
         }
-
         return webDriver;
 
     }
