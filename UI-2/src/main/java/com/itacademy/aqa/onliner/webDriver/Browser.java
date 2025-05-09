@@ -40,10 +40,15 @@ public class Browser {
 
     public static WebElement waitForElementToBeClickable(By locator) {
 
+        try {
         WebDriverWait wait = new WebDriverWait(getWebDriver(), Duration.ofSeconds(TIME_OUT_IN_SECONDS));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
         WebElement element = getWebDriver().findElement(locator);
         return element;
+        } catch (NotFoundException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     public static WebElement waitForElementToBeVisible(By locator) {
