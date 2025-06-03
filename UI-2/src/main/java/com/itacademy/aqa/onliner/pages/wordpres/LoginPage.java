@@ -12,7 +12,7 @@ public class LoginPage {
   public void login(String userName, String password) {
     WebElement userNameField = Browser.waitForElementToBeVisible(USER_NAME_LOCATOR);
     WebElement userPasswordField = Browser.waitForElementToBeVisible(PASSW_LOCATOR);
-    WebElement submitButton = Browser.waitForElementToBeClickable(PASSW_LOCATOR);
+    WebElement submitButton = Browser.waitForElementToBeClickable(SUBMIT_BUTTON);
 
     userNameField.clear();
     userNameField.sendKeys(userName);
