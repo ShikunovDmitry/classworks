@@ -1,21 +1,21 @@
 package com.itacademy.aqa;
 
 public class InitializationOrder {
-  // Статическое поле
-  private static String staticField = initializeStaticField();
-
-  // Нестатическое поле
-  private String instanceField = initializeInstanceField();
 
   // Статический блок
   static {
     System.out.println("1. Static block is executed");
   }
+  // Статическое поле
+  private static String staticField = initializeStaticField();
 
   // Нестатический блок
   {
     System.out.println("3. Instance block is executed");
   }
+  // Нестатическое поле
+  private String instanceField = initializeInstanceField();
+
 
   // Конструктор
   public InitializationOrder() {
